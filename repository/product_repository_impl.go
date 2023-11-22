@@ -16,6 +16,25 @@ type ProductRepositoryImpl struct {
 	db *gorm.DB
 }
 
+// DeletProduct implements ProductRepository.
+func (repository *ProductRepositoryImpl) DeletProduct(id string) error {
+	var entity entity.Product
+	err := repository.db.Where("id = ?", id).Delete(&entity).Error
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+// UpdateProduct implements ProductRepository.
+func (repository *ProductRepositoryImpl) UpdateProduct(entity *entity.Product) (*entity.Product, error) {
+	err := repository.db.Save(&entity).Error
+	if err != nil {
+		return nil, err
+	}
+	return entity, nil
+}
+
 // GetProductById implements ProductRepository.
 func (repository *ProductRepositoryImpl) GetProductById(id string) (product entity.Product, err error) {
 	err = repository.db.Where("id = ?", id).First(&product).Error
@@ -26,12 +45,12 @@ func (repository *ProductRepositoryImpl) GetProductById(id string) (product enti
 }
 
 // CreateProduct implements ProductRepository.
-func (repository *ProductRepositoryImpl) CreateProduct(entity *entity.Product) error {
+func (repository *ProductRepositoryImpl) CreateProduct(entity *entity.Product) (*entity.Product, error) {
 	err := repository.db.Create(entity).Error
 	if err != nil {
-		return err
+		return nil, err
 	}
-	return nil
+	return entity, nil
 }
 
 // ListProduct implements ProductRepository.

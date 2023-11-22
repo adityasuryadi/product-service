@@ -4,6 +4,7 @@ import (
 	"log"
 	"product-service/config"
 	"product-service/controller"
+	rabbitmq "product-service/pkg/rabbitmq"
 	"product-service/repository"
 	"product-service/service"
 
@@ -83,13 +84,18 @@ func ListenQueue() {
 }
 
 func main() {
+	cfg, err := config.LoadConfig("dev.env")
+	if err != nil {
+		panic("canot load config file")
+	}
 	app := fiber.New()
 
-	db := config.InitDB()
+	db := config.InitDB(cfg)
+	rabbitMQConn, err := rabbitmq.NewRabbitMqConn(cfg)
 	productRepository := repository.NewProductRepository(db)
-	productService := service.NewProductService(productRepository)
+	productService := service.NewProductService(productRepository, rabbitMQConn)
 	productController := controller.NewProductController(productService)
-
+	defer rabbitMQConn.Close()
 	app.Use(recover.New(recover.ConfigDefault))
 	app.Use(cors.New(cors.Config{
 		AllowHeaders: "Origin, Content-Type, Accept, Range, Authorization",
