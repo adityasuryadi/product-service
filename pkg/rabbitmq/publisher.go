@@ -73,7 +73,7 @@ func (p *Publisher) CloseChannel() {
 func (p *Publisher) Publish(body []byte) {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
-	p.channell.PublishWithContext(ctx, "product.created", "create", false, false, amqp.Publishing{
+	p.channell.PublishWithContext(ctx, p.pCfg.Exchange, p.pCfg.RoutingKey, false, false, amqp.Publishing{
 		ContentType: "text/plain",
 		Body:        body,
 	})

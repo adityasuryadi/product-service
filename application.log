@@ -1,0 +1,1 @@
+{"level":"error","timestamp":"2023-11-23T06:53:51.746Z","caller":"exception/panic.go:11","msg":"Test zap log error","error":"test err"}

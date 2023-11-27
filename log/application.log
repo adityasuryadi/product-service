@@ -1,0 +1,25 @@
+{"level":"error","timestamp":"2023-11-23T06:54:56.542Z","caller":"exception/panic.go:11","msg":"Test zap log error","error":"test err"}
+{"level":"error","timestamp":"2023-11-23T06:55:11.199Z","caller":"exception/panic.go:11","msg":"Test zap log error","error":"test err"}
+{"level":"error","timestamp":"2023-11-23T06:56:48.234Z","caller":"exception/panic.go:11","msg":"Test zap log error","error":"test err"}
+{"level":"error","timestamp":"2023-11-23T06:57:43.731Z","caller":"exception/panic.go:11","msg":"Test zap log error","error":"test err"}
+{"level":"error","timestamp":"2023-11-23T07:19:58.285Z","caller":"exception/panic.go:11","msg":"unable connect rabbitmq","error":"dial tcp 172.18.0.5:5672: connect: connection refused"}
+{"level":"error","timestamp":"2023-11-23T12:17:29.755Z","caller":"exception/panic.go:11","msg":"cannot open db","error":"INTERNAL_SERVER_ERROR"}
+{"level":"error","timestamp":"2023-11-23T12:19:49.207Z","caller":"exception/panic.go:11","msg":"cannot open db","error":"INTERNAL_SERVER_ERROR"}
+{"level":"error","timestamp":"2023-11-23T12:20:08.425Z","caller":"exception/panic.go:11","msg":"cannot open db","error":"INTERNAL_SERVER_ERROR"}
+{"level":"error","timestamp":"2023-11-23T12:20:34.461Z","caller":"exception/panic.go:11","msg":"cannot open rabbitmq","error":"INTERNAL_SERVER_ERROR"}
+{"level":"error","timestamp":"2023-11-24T03:13:20.845Z","caller":"exception/panic.go:11","msg":"cannot open rabbitmq","error":"INTERNAL_SERVER_ERROR"}
+{"level":"error","timestamp":"2023-11-24T06:31:39.315Z","caller":"exception/panic.go:11","msg":"cannot open rabbitmq","error":"INTERNAL_SERVER_ERROR"}
+{"level":"error","timestamp":"2023-11-27T01:26:15.956Z","caller":"exception/panic.go:11","msg":"cannot open rabbitmq","error":"INTERNAL_SERVER_ERROR"}
+{"level":"error","timestamp":"2023-11-27T05:02:44.493Z","caller":"exception/panic.go:11","msg":"cannot open rabbitmq","error":"INTERNAL_SERVER_ERROR"}
+{"level":"error","timestamp":"2023-11-27T05:03:06.761Z","caller":"exception/panic.go:11","msg":"cannot open rabbitmq","error":"INTERNAL_SERVER_ERROR"}
+{"level":"error","timestamp":"2023-11-27T05:07:59.628Z","caller":"exception/panic.go:11","msg":"cannot open rabbitmq","error":"INTERNAL_SERVER_ERROR"}
+{"level":"error","timestamp":"2023-11-27T05:08:30.218Z","caller":"exception/panic.go:11","msg":"cannot open rabbitmq","error":"INTERNAL_SERVER_ERROR"}
+{"level":"error","timestamp":"2023-11-27T05:53:02.080Z","caller":"exception/panic.go:11","msg":"cannot open rabbitmq","error":"INTERNAL_SERVER_ERROR"}
+{"level":"error","timestamp":"2023-11-27T06:05:11.269Z","caller":"exception/panic.go:11","msg":"cannot open rabbitmq","error":"INTERNAL_SERVER_ERROR"}
+{"level":"error","timestamp":"2023-11-27T06:27:07.377Z","caller":"exception/panic.go:11","msg":"cannot open rabbitmq","error":"INTERNAL_SERVER_ERROR"}
+{"level":"error","timestamp":"2023-11-27T06:27:55.783Z","caller":"exception/panic.go:11","msg":"cannot open rabbitmq","error":"INTERNAL_SERVER_ERROR"}
+{"level":"error","timestamp":"2023-11-27T06:30:01.377Z","caller":"exception/panic.go:11","msg":"cannot open rabbitmq","error":"INTERNAL_SERVER_ERROR"}
+{"level":"error","timestamp":"2023-11-27T06:30:45.488Z","caller":"exception/panic.go:11","msg":"cannot open rabbitmq","error":"INTERNAL_SERVER_ERROR"}
+{"level":"error","timestamp":"2023-11-27T06:31:08.608Z","caller":"exception/panic.go:11","msg":"cannot open rabbitmq","error":"INTERNAL_SERVER_ERROR"}
+{"level":"error","timestamp":"2023-11-27T06:37:58.709Z","caller":"exception/panic.go:11","msg":"cannot open rabbitmq","error":"INTERNAL_SERVER_ERROR"}
+{"level":"error","timestamp":"2023-11-27T06:38:46.539Z","caller":"exception/panic.go:11","msg":"cannot open rabbitmq","error":"INTERNAL_SERVER_ERROR"}

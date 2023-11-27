@@ -2,7 +2,8 @@ package service
 
 import (
 	"encoding/json"
-	"product-service/config"
+	"errors"
+	"fmt"
 	"product-service/entity"
 	"product-service/exception"
 	"product-service/model"
@@ -10,6 +11,7 @@ import (
 	"product-service/repository"
 
 	"github.com/rabbitmq/amqp091-go"
+	"gorm.io/gorm"
 )
 
 type ProductServiceImpl struct {
@@ -26,7 +28,13 @@ func NewProductService(repository repository.ProductRepository, rabbitMQConn *am
 
 // DeleteProduct implements ProductService.
 func (service *ProductServiceImpl) DeleteProduct(id string) (errorCode int) {
-	err := service.Repository.DeletProduct(id)
+	_, err := service.Repository.GetProductById(id)
+	fmt.Println("product", err)
+	if errors.Is(err, gorm.ErrRecordNotFound) {
+		return 404
+	}
+
+	err = service.Repository.DeleteProduct(id)
 	if err != nil {
 		return 500
 	}
@@ -35,8 +43,20 @@ func (service *ProductServiceImpl) DeleteProduct(id string) (errorCode int) {
 	queue := "product.delete"
 	routingKey := "delete"
 
-	channel := config.NewRabbitMqConn(exchange, queue, routingKey)
-	channel.ChannelDeclare(id)
+	PublisherConfig := &rabbitmq.PublisherConfig{
+		Exchange:    exchange,
+		QueueName:   queue,
+		RoutingKey:  routingKey,
+		ConsumerTag: "",
+	}
+	body, err := json.Marshal(id)
+	if err != nil {
+		exception.FailOnError(err, "failed decode product")
+	}
+	ch := rabbitmq.NewPublisher(service.RabbitMqConn, PublisherConfig)
+	defer ch.CloseChannel()
+	ch.SetupExchangeAndQueue()
+	ch.Publish(body)
 	return 200
 }
 
@@ -73,8 +93,20 @@ func (service *ProductServiceImpl) EditProduct(id string, request model.CreatePr
 		Description: result.Description,
 	}
 
-	channel := config.NewRabbitMqConn(exchange, queue, routingKey)
-	channel.ChannelDeclare(product)
+	PublisherConfig := &rabbitmq.PublisherConfig{
+		Exchange:    exchange,
+		QueueName:   queue,
+		RoutingKey:  routingKey,
+		ConsumerTag: "",
+	}
+	body, err := json.Marshal(product)
+	if err != nil {
+		exception.FailOnError(err, "failed decode product")
+	}
+	ch := rabbitmq.NewPublisher(service.RabbitMqConn, PublisherConfig)
+	defer ch.CloseChannel()
+	ch.SetupExchangeAndQueue()
+	ch.Publish(body)
 
 	return 200, product
 }

@@ -1,9 +1,12 @@
 package main
 
 import (
+	"errors"
 	"log"
 	"product-service/config"
 	"product-service/controller"
+	"product-service/exception"
+	"product-service/pkg/postgres"
 	rabbitmq "product-service/pkg/rabbitmq"
 	"product-service/repository"
 	"product-service/service"
@@ -90,7 +93,9 @@ func main() {
 	}
 	app := fiber.New()
 
-	db := config.InitDB(cfg)
+	exception.FailOnError(errors.New("INTERNAL_SERVER_ERROR"), "cannot open rabbitmq")
+
+	db := postgres.NewConnPostgres(cfg)
 	rabbitMQConn, err := rabbitmq.NewRabbitMqConn(cfg)
 	productRepository := repository.NewProductRepository(db)
 	productService := service.NewProductService(productRepository, rabbitMQConn)

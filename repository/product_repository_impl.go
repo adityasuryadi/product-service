@@ -17,7 +17,7 @@ type ProductRepositoryImpl struct {
 }
 
 // DeletProduct implements ProductRepository.
-func (repository *ProductRepositoryImpl) DeletProduct(id string) error {
+func (repository *ProductRepositoryImpl) DeleteProduct(id string) error {
 	var entity entity.Product
 	err := repository.db.Where("id = ?", id).Delete(&entity).Error
 	if err != nil {

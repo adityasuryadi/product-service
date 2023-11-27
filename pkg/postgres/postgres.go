@@ -1,4 +1,4 @@
-package config
+package postgres
 
 import (
 	"github.com/spf13/viper"
@@ -6,7 +6,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func InitDB(cfg *viper.Viper) *gorm.DB {
+func NewConnPostgres(cfg *viper.Viper) *gorm.DB {
 	host := cfg.GetString("PG_HOST")
 	user := cfg.GetString("PG_USER")
 	password := cfg.GetString("PG_PASSWORD")
